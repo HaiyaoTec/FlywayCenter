@@ -94,7 +94,7 @@ BUILD SUCCESSFUL in 16s
 
 ## License
 ```markdown
-Copyright (C) 2018-2019 [Junuo Tec](https://jinuo.me)
+Copyright (C) 2018-2019 JunuoTec
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
