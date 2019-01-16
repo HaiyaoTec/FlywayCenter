@@ -63,7 +63,7 @@ flyway_center{
 There will be several task created by flyway center in group `flyway center`
 
  
-<image src="doc/tasks.jpg" width=300/>
+<image src="doc/tasks.jpg" width=200/>
 
 **Example**
 ```java
