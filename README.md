@@ -1,4 +1,5 @@
 # Flyway Center
+[ ![Download](https://api.bintray.com/packages/jinuotec/maven/flyway-center/images/download.svg?version=1.0.1) ](https://bintray.com/jinuotec/maven/flyway-center/1.0.1/link)  
 Flyway Center is mainly used to add multi-environment support to Flyway
 
 
