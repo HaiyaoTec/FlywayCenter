@@ -1,0 +1,57 @@
+buildscript {
+    ext {
+        localMaven = true
+
+        uploadLocalVersion = '1.0.0-SNAPSHOT'
+        compileLocalVersion = '1.0.0-SNAPSHOT'
+
+        uploadRemoteVersion = '1.0.0'
+        compileRemoteVersion = '1.0.0'
+    }
+    repositories {
+        mavenCentral()
+        if (localMaven){
+            mavenLocal()
+        }
+    }
+
+}
+
+
+plugins {
+    id 'java'
+    id 'groovy'
+}
+
+group 'me.jinuo.backend'
+if (localMaven) {
+    version uploadLocalVersion
+}else{
+    version uploadRemoteVersion
+}
+
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'org.flywaydb:flyway-gradle-plugin:5.2.4'
+}
+
+
+if (localMaven){
+    apply plugin: 'maven'
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: mavenLocal().url)
+            }
+        }
+    }
+}
