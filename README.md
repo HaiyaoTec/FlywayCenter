@@ -1,7 +1,7 @@
 # Flyway Center
 [ ![Download](https://api.bintray.com/packages/jinuotec/maven/flyway-center/images/download.svg?version=1.0.1) ](https://bintray.com/jinuotec/maven/flyway-center/1.0.1/link) 
 [ ![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)  
-Flyway Center is mainly used to add multi-environment support to Flyway
+Flyway Center add multi-environment support to Flyway
 
 ### Manager database in dedicated project
 We suggest to manager database in dedicated project, because in most cases, there are multiple projects use the same database. so we made flyway center to manager the database project.  
