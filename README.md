@@ -45,9 +45,10 @@ flyway_center{
 
 
 ### Start
-There will be several task created by flyway center in group `flyway center` 
-![](doc/tasks.jpg)
+There will be several task created by flyway center in group `flyway center`
 
+ 
+![](doc/tasks.jpg)  
 
 **Example**
 ```java
