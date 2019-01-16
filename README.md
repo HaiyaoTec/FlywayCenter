@@ -3,6 +3,15 @@
 [ ![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)  
 Flyway Center is mainly used to add multi-environment support to Flyway
 
+### Manager database in dedicated project
+We suggest to manager database in dedicated project, because in most cases, there are multiple projects use the same database.  
+so we use flyway center to manager the database project.  
+add migration scripts in the java and resources directory.   
+In java directory, you can write java based migrations.  
+
+
+![](doc/project.jpg)
+
 
 # Usage
 ### Apply Plugin
@@ -22,8 +31,8 @@ apply plugin: 'flyway-center'
 ```
 
 ### Config Database
-You can config env in flyway_center and the config in flyway is also effective.
- 
+You can config env in flyway_center in `build.gradle` and the config in flyway is also effective.
+
 ```groovy
 flyway_center{
     driver = 'com.mysql.cj.jdbc.Driver'
