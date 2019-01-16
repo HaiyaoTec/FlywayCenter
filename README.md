@@ -4,13 +4,12 @@
 Flyway Center is mainly used to add multi-environment support to Flyway
 
 ### Manager database in dedicated project
-We suggest to manager database in dedicated project, because in most cases, there are multiple projects use the same database.  
-so we use flyway center to manager the database project.  
+We suggest to manager database in dedicated project, because in most cases, there are multiple projects use the same database. so we made flyway center to manager the database project.  
 add migration scripts in the java and resources directory.   
 In java directory, you can write java based migrations.  
 
 
-![](doc/project.jpg)
+<image src="doc/project.jpg" width=300/>
 
 
 # Usage
@@ -64,7 +63,7 @@ flyway_center{
 There will be several task created by flyway center in group `flyway center`
 
  
-![](doc/tasks.jpg)  
+<image src="doc/tasks.jpg" width=300/>
 
 **Example**
 ```java
