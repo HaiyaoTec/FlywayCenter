@@ -1,34 +1,20 @@
 buildscript {
-    ext {
-        localMaven = true
-
-        uploadLocalVersion = '1.0.0-SNAPSHOT'
-        compileLocalVersion = '1.0.0-SNAPSHOT'
-
-        uploadRemoteVersion = '1.0.0'
-        compileRemoteVersion = '1.0.0'
-    }
     repositories {
         mavenCentral()
-        if (localMaven){
-            mavenLocal()
-        }
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.9'
     }
 
 }
 
 
 plugins {
-    id 'java'
     id 'groovy'
 }
 
 group 'me.jinuo.backend'
-if (localMaven) {
-    version uploadLocalVersion
-}else{
-    version uploadRemoteVersion
-}
+version '1.0.1'
 
 
 sourceCompatibility = 1.8
@@ -45,13 +31,19 @@ dependencies {
 }
 
 
-if (localMaven){
-    apply plugin: 'maven'
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                repository(url: mavenLocal().url)
-            }
-        }
-    }
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    userOrg = 'jinuotec'
+    groupId = 'me.jinuo.backend'
+    artifactId = 'flyway-center'
+    publishVersion = version
+    autoPublish = true
+    dryRun = false
+    desc = 'Flyway Center is mainly used to add multi-environment support to Flyway'
+    website = 'https://github.com/JinuoTec/FlywayCenter'
+
+    bintrayUser = bintrayUploadUser
+    bintrayKey = bintrayUploadKey
 }
+

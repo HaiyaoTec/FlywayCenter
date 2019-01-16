@@ -4,12 +4,13 @@ Flyway Center is mainly used to add multi-environment support to Flyway
 
 # Usage
 ### Apply Plugin
+Flyway Center will auto apply Flyway Plugin.
+
 ```groovy
 buildscript {
    
     dependencies {
-        classpath group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
-        classpath 'me.jinuo.backend:flyway-center:1.0.0-SNAPSHOT'
+        classpath 'me.jinuo.backend:flyway-center:1.0.1'
     }
     
 }
@@ -19,8 +20,9 @@ apply plugin: 'flyway-center'
 ```
 
 ### Config Database
+You can config env in flyway_center and the config in flyway is also effective.
+ 
 ```groovy
-
 flyway_center{
     driver = 'com.mysql.cj.jdbc.Driver'
     env {
@@ -35,12 +37,15 @@ flyway_center{
             protect = true
             url = 'jdbc:mysql://xxxxxxxx:3306/flyway_prod'
             user = 'xxxxx'
+            // you can don't write password here and input when invoke task
             password = 'xxxxx'
             target = '3.1.5'
         }
+        other_env {
+           ......
+        }
     }
 }
-
 ```
 
 

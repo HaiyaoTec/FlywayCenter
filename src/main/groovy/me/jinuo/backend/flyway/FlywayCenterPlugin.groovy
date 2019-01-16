@@ -48,10 +48,7 @@ class FlywayCenterPlugin implements Plugin<Project> {
         task.group = "flyway center"
         task.dependsOn project.tasks.findByName("build")
         task.doFirst {
-            flywayExtension.url = env.url
-            flywayExtension.user = env.user
-            flywayExtension.password = env.password
-            flywayExtension.target = env.target
+            updateFlyway('validate', env, flywayExtension)
         }
     }
 
@@ -61,17 +58,7 @@ class FlywayCenterPlugin implements Plugin<Project> {
         task.group = "flyway center"
         task.dependsOn project.tasks.findByName("build")
         task.doFirst {
-            if (env.protect){
-                def userInputHandler = project.services.get(UserInputHandler)
-                def response = userInputHandler.askQuestion("Please enter \'migrate $env.name\' to comfirm dangerous action: ","no")
-                if (response != "migrate $env.name"){
-                    throw new IllegalAccessError('Dangerous action confirm failed')
-                }
-            }
-            flywayExtension.url = env.url
-            flywayExtension.user = env.user
-            flywayExtension.password = env.password
-            flywayExtension.target = env.target
+            updateFlyway('migrate', env, flywayExtension, true)
         }
     }
 
@@ -81,17 +68,7 @@ class FlywayCenterPlugin implements Plugin<Project> {
         task.group = "flyway center"
         task.dependsOn project.tasks.findByName("build")
         task.doFirst {
-            if (env.protect){
-                def userInputHandler = project.services.get(UserInputHandler)
-                def response = userInputHandler.askQuestion("Please enter \'baseline $env.name\' to comfirm dangerous action: ","no")
-                if (response != "migrate $env.name"){
-                    throw new IllegalAccessError('Dangerous action confirm failed')
-                }
-            }
-            flywayExtension.url = env.url
-            flywayExtension.user = env.user
-            flywayExtension.password = env.password
-            flywayExtension.target = env.target
+            updateFlyway('baseline', env, flywayExtension, true)
         }
     }
 
@@ -101,10 +78,7 @@ class FlywayCenterPlugin implements Plugin<Project> {
         task.group = "flyway center"
         task.dependsOn project.tasks.findByName("build")
         task.doFirst {
-            flywayExtension.url = env.url
-            flywayExtension.user = env.user
-            flywayExtension.password = env.password
-            flywayExtension.target = env.target
+            updateFlyway('validate', env, flywayExtension)
         }
     }
 
@@ -114,10 +88,33 @@ class FlywayCenterPlugin implements Plugin<Project> {
         task.group = "flyway center"
         task.dependsOn project.tasks.findByName("build")
         task.doFirst {
-            flywayExtension.url = env.url
+            updateFlyway('validate', env, flywayExtension, true)
+        }
+    }
+
+    def updateFlyway(String action, DatabaseEnv env, FlywayExtension flywayExtension, boolean dangerous = false) {
+        if (dangerous && env.protect){
+            def userInputHandler = project.services.get(UserInputHandler)
+            def response = userInputHandler.askQuestion("Please enter \'$action $env.name\' to comfirm dangerous action: ","no")
+            if (response != "$action $env.name"){
+                throw new IllegalAccessError('Dangerous action confirm failed')
+            }
+        }
+        flywayExtension.url = env.url
+        flywayExtension.target = env.target
+
+        if (!env.user || env.user.isEmpty()){
+            def userInputHandler = project.services.get(UserInputHandler)
+            flywayExtension.user = userInputHandler.askQuestion("Please enter \'$env.name\' user: ",null)
+        }else{
             flywayExtension.user = env.user
+        }
+
+        if (!env.password || env.password.isEmpty()){
+            def userInputHandler = project.services.get(UserInputHandler)
+            flywayExtension.password = userInputHandler.askQuestion("Please enter \'$env.name\' password: ",null)
+        }else{
             flywayExtension.password = env.password
-            flywayExtension.target = env.target
         }
     }
 
